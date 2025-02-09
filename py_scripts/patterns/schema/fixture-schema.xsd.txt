@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+  <!-- Root Element -->
+  <xs:element name="LightingEditModel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Brightness" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PointBlock">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="Point" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:attribute name="x" type="xs:decimal" use="required" />
+                        <xs:attribute name="y" type="xs:decimal" use="required" />
+                        <xs:attribute name="type" type="xs:int" use="required" /> <!-- 1 for first, 2 for intermediate, 3 for last -->
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute name="xleft" type="xs:int" use="required" />
+                  <xs:attribute name="xright" type="xs:int" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Colour" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ColourBlock" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="xleft" type="xs:int" use="required" />
+                  <xs:attribute name="colourleft" type="xs:int" use="required" /> <!-- Signed RGB integer -->
+                  <xs:attribute name="xright" type="xs:int" use="required" />
+                  <xs:attribute name="colourright" type="xs:int" use="required" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Strobe" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="StrobeBlock" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="xleft" type="xs:int" use="required" />
+                  <xs:attribute name="strobeleft" type="xs:decimal" use="required" /> <!-- 0 to 1 -->
+                  <xs:attribute name="xright" type="xs:int" use="required" />
+                  <xs:attribute name="stroberight" type="xs:decimal" use="required" /> <!-- 0 to 1 -->
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Position" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="MovementBlock" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="xleft" type="xs:int" use="required" />
+                  <xs:attribute name="xright" type="xs:int" use="required" />
+                  <xs:attribute name="pattern" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="Circle" />
+                        <xs:enumeration value="Eight" />
+                        <xs:enumeration value="Line" />
+                        <xs:enumeration value="Line2" />
+                        <xs:enumeration value="Diamond" />
+                        <xs:enumeration value="Square" />
+                        <xs:enumeration value="SquareChoppy" />
+                        <xs:enumeration value="Leaf" />
+                        <xs:enumeration value="Lissajous" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="direction" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="Forward" />
+                        <xs:enumeration value="Backward" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="type" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:string">
+                        <xs:enumeration value="Loop" />
+                        <xs:enumeration value="PingPong" />
+                        <xs:enumeration value="SingleShot" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                  <xs:attribute name="width" type="xs:int" use="required" /> <!-- 0-127 -->
+                  <xs:attribute name="height" type="xs:int" use="required" /> <!-- 0-127 -->
+                  <xs:attribute name="offset_x" type="xs:int" use="required" /> <!-- 0-127 -->
+                  <xs:attribute name="offset_y" type="xs:int" use="required" /> <!-- 0-127 -->
+                  <xs:attribute name="round_angle" type="xs:int" use="required" /> <!-- 0-359 degrees -->
+                  <xs:attribute name="offset_angle" type="xs:int" use="required" /> <!-- 0-359 degrees -->
+                  <xs:attribute name="period_time" type="xs:int" use="required" /> <!-- Milliseconds, max 100000 -->
+                  <xs:attribute name="frequency_x" type="xs:int" use="required" /> <!-- Max 32 -->
+                  <xs:attribute name="frequency_y" type="xs:int" use="required" /> <!-- Max 32 -->
+                  <xs:attribute name="phase_x" type="xs:int" use="required" /> <!-- 0-360 degrees -->
+                  <xs:attribute name="phase_y" type="xs:int" use="required" /> <!-- 0-360 degrees -->
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Rotate" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RotateBlock" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="xleft" type="xs:int" use="required" />
+                  <xs:attribute name="rotateleft" type="xs:decimal" use="required" /> <!-- 0 to 1 -->
+                  <xs:attribute name="xright" type="xs:int" use="required" />
+                  <xs:attribute name="rotateright" type="xs:decimal" use="required" /> <!-- 0 to 1 -->
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Gobo" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="GoboBlock" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="xleft" type="xs:int" use="required" />
+                  <xs:attribute name="xright" type="xs:int" use="required" />
+                  <xs:attribute name="goboindex" type="xs:int" use="required" /> <!-- Integer index -->
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute name="ver" type="xs:string" use="required" />
+    </xs:complexType>
+  </xs:element>
+
+</xs:schema>

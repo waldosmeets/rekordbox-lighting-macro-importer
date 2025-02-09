@@ -1,0 +1,12 @@
+- Create a rich colorbank with colors beloning to the mood banks of Rekordbox
+- Create a list of Decimal colors (16711680) and their name in english
+- Allow users to select which of the fixtures they want to be part of the macro scene
+
+QUestions to answer before building the app:
+- Is it ok for bars to not have lights on?
+- What do we need to know about moving heads?
+    - Gobo settings?
+
+
+scene:
+.bars = 16/32/64
